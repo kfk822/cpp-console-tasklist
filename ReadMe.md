@@ -4,19 +4,40 @@ A simple console-based task manager application.
 
 ## WORK IN PROGRESS
 
-## MOTIVATION
+## Motivation
 
 The goal is to build a simple console application that can serve
 as a helper for future projects.
 
-## PLANNED FEATURES
-
--View tasks
--Add task from console
--Mark completed tasks
--Save progress to file
--Load progress from file
-
 ## Features
 
--None yet(initial setup phase)
+- View tasks
+
+## Windows (prebuilt)
+
+Download the `.exe` from the Releases page and run it.
+
+## Requirements
+
+- CMake 3.10+
+- C++17 compiler
+    - Windows: Visual Studio 2019+ / MinGW-64
+    - Linux: g++ 7+ / clang++ 6+
+    - macOS: Xcode / clang++
+- No additional libraries needed
+
+## Build from source
+
+```bash
+mkdir build
+cd build
+cmake ..
+cmake --build .
+```
+
+## Planned featurs
+
+- Add task from console
+- Mark completed tasks
+- Save progress to file
+- Load progress from file
