@@ -1,6 +1,8 @@
 #include "taskList.h"
 #include "IO.h"
 #include <iostream>
+#include <vector>
+#include <string>
 
 TASKLIST::TASKLIST()
 {
@@ -21,7 +23,19 @@ void TASKLIST::Run()
 
         if (input == "view" || input == "v")
         {
-            io->ShowTasks();
+            if (tasks.empty())
+            {
+                io->NoTask();
+            }
+            else
+            {
+                io->ShowTasks(tasks);
+            }
+        }
+        else if (input == "add" || input == "a")
+        {
+            io->AddTask();
+            tasks.push_back(io->Input());
         }
         else if (input == "help" || input == "h")
         {
@@ -30,6 +44,10 @@ void TASKLIST::Run()
         else if (input == "quit" || input == "q")
         {
             taskListShouldRun = false;
+        }
+        else
+        {
+            io->InvalidInput();
         }
     }
 

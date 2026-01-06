@@ -12,6 +12,7 @@ as a helper for future projects.
 ## Features
 
 - View tasks
+- Add tasks from console
 
 ## Windows (prebuilt)
 
@@ -37,7 +38,6 @@ cmake --build .
 
 ## Planned featurs
 
-- Add task from console
 - Mark completed tasks
 - Save progress to file
 - Load progress from file
