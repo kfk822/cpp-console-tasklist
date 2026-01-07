@@ -1,4 +1,4 @@
-CPP_CONSOLE_TASKLIST
+## CPP_CONSOLE_TASKLIST
 
 A simple console-based task manager application.
 
@@ -13,6 +13,7 @@ as a helper for future projects.
 
 - View tasks
 - Add tasks from console
+- Mark completed tasks
 
 ## Windows (prebuilt)
 
@@ -38,6 +39,5 @@ cmake --build .
 
 ## Planned featurs
 
-- Mark completed tasks
 - Save progress to file
 - Load progress from file

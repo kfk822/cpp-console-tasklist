@@ -13,8 +13,12 @@ public:
 
     std::string Input();
     void NoTask();
-    void ShowTasks(std::vector<std::string> tasks);
+    void Task();
+    void ShowMarkedTask(std::string task);
+    void ShowUnMarkedTask(std::string task);
+    void Numbering(int i);
     void AddTask();
+    void MarkTask();
     void ShowOptions();
     void ShowHelp();
     void InvalidInput();

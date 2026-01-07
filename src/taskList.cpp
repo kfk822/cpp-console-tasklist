@@ -1,6 +1,5 @@
 #include "taskList.h"
 #include "IO.h"
-#include <iostream>
 #include <vector>
 #include <string>
 
@@ -29,13 +28,57 @@ void TASKLIST::Run()
             }
             else
             {
-                io->ShowTasks(tasks);
+                io->Task();
+                for (int i = 0; i < tasks.size(); i++)
+                {
+                    if (marked.at(i) == true)
+                    {
+                        io->ShowMarkedTask(tasks.at(i));
+                    }
+                    else
+                    {
+                        io->ShowUnMarkedTask(tasks.at(i));
+                    }
+                }
             }
         }
         else if (input == "add" || input == "a")
         {
             io->AddTask();
             tasks.push_back(io->Input());
+            marked.push_back(false);
+        }
+        else if (input == "mark" || input == "m")
+        {
+            if (tasks.empty())
+            {
+                io->NoTask();
+            }
+            else
+            {
+                io->MarkTask();
+                for (int i = 0; i < tasks.size(); i++)
+                {
+                    io->Numbering(i);
+                    if (marked.at(i) == true)
+                    {
+                        io->ShowMarkedTask(tasks.at(i));
+                    }
+                    else
+                    {
+                        io->ShowUnMarkedTask(tasks.at(i));
+                    }
+                }
+                std::string markNumber = io->Input();
+                if (ValidateInt(markNumber, tasks.size()))
+                {
+                    marked.at(std::stoi(markNumber) - 1) = !marked.at(std::stoi(markNumber) - 1);
+                }
+                else
+                {
+                    io->InvalidInput();
+                }
+            }
         }
         else if (input == "help" || input == "h")
         {
@@ -52,4 +95,24 @@ void TASKLIST::Run()
     }
 
     delete io;
+}
+
+bool TASKLIST::ValidateInt(std::string num, int size)
+{
+    for (int i = 0; i < num.length(); i++)
+    {
+        if (!(num.at(i) >= '1' && num.at(i) <= '9'))
+        {
+            return false;
+        }
+    }
+    if (std::stoi(num) <= size)
+    {
+
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }

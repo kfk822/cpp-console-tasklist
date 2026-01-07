@@ -22,18 +22,34 @@ void IO::NoTask()
     std::cout << "Task list is empty.\n";
 }
 
-void IO::ShowTasks(std::vector<std::string> tasks)
+void IO::Task()
 {
-    std::cout << "Tasks:\n";
-    for (int i = 0; i < tasks.size(); i++)
-    {
-        std::cout << tasks.at(i) << "\n";
-    }
+    std::cout << "Tasks([ ] == unfinished, [X] == finished):\n";
+}
+
+void IO::ShowMarkedTask(std::string task)
+{
+    std::cout << "[X]" << task << "\n";
+}
+
+void IO::ShowUnMarkedTask(std::string task)
+{
+    std::cout << "[ ]" << task << "\n";
+}
+
+void IO::Numbering(int i)
+{
+    std::cout << i + 1 << ".)\t";
 }
 
 void IO::AddTask()
 {
     std::cout << "Add task:\n";
+}
+
+void IO::MarkTask()
+{
+    std::cout << "Wich task do you want to mark or unmark?([ ] == unfinished, [X] == finished)\n";
 }
 
 void IO::ShowOptions()
@@ -47,6 +63,7 @@ void IO::ShowHelp()
     std::cout << "Availabe commands:\n";
     std::cout << "view\tView task list\n";
     std::cout << "add\tAdd new task\n";
+    std::cout << "mark\tMark task as finished\n";
 }
 
 void IO::InvalidInput()
