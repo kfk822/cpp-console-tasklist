@@ -27,29 +27,19 @@ void IO::Task()
     std::cout << "Tasks([ ] == unfinished, [X] == finished):\n";
 }
 
-void IO::ShowMarkedTask(std::string task)
+void IO::ShowMarkedTask(std::string task, int taskNum)
 {
-    std::cout << "[X]" << task << "\n";
+    std::cout << taskNum + 1 << ".) [X] " << task << "\n";
 }
 
-void IO::ShowUnMarkedTask(std::string task)
+void IO::ShowUnMarkedTask(std::string task, int taskNum)
 {
-    std::cout << "[ ]" << task << "\n";
-}
-
-void IO::Numbering(int i)
-{
-    std::cout << i + 1 << ".)\t";
+    std::cout << taskNum + 1 << ".) [ ] " << task << "\n";
 }
 
 void IO::AddTask()
 {
     std::cout << "Add task:\n";
-}
-
-void IO::MarkTask()
-{
-    std::cout << "Wich task do you want to mark or unmark?([ ] == unfinished, [X] == finished)\n";
 }
 
 void IO::ShowOptions()
@@ -61,10 +51,10 @@ void IO::ShowOptions()
 void IO::ShowHelp()
 {
     std::cout << "Availabe commands:\n";
-    std::cout << "list (l)\tlist tasks\n";
-    std::cout << "add (a)\tAdd new task\n";
-    std::cout << "mark (m)\tMark task as finished\n";
-    std::cout << "cancel (c)\tCancel current action\n";
+    std::cout << "list\t(l)\tList tasks\n";
+    std::cout << "add\t(a)\tAdd new task\n";
+    std::cout << "mark\t(m)\tMark task as finished\n";
+    std::cout << "cancel\t(c)\tCancel current action\n";
 }
 
 void IO::InvalidInput()

@@ -14,11 +14,9 @@ public:
     std::string Input();
     void NoTask();
     void Task();
-    void ShowMarkedTask(std::string task);
-    void ShowUnMarkedTask(std::string task);
-    void Numbering(int i);
+    void ShowMarkedTask(std::string task, int taskNum);
+    void ShowUnMarkedTask(std::string task, int taskNum);
     void AddTask();
-    void MarkTask();
     void ShowOptions();
     void ShowHelp();
     void InvalidInput();

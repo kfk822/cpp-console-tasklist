@@ -5,122 +5,158 @@
 
 TASKLIST::TASKLIST()
 {
+    io = new IO();
 }
 
 TASKLIST::~TASKLIST()
 {
+    delete io;
 }
 
 void TASKLIST::Run()
 {
-    IO *io = new IO();
-
     while (taskListShouldRun)
     {
         io->ShowOptions();
-        std::string input = io->Input();
+        std::string input = GetValidInput(noValidation);
 
         if (input == "list" || input == "l")
         {
-            if (tasks.empty())
-            {
-                io->NoTask();
-            }
-            else
-            {
-                io->Task();
-                for (int i = 0; i < numOfTasks; i++)
-                {
-                    if (marked.at(i) == true)
-                    {
-                        io->ShowMarkedTask(tasks.at(i));
-                    }
-                    else
-                    {
-                        io->ShowUnMarkedTask(tasks.at(i));
-                    }
-                }
-            }
+            HandleList();
         }
         else if (input == "add" || input == "a")
         {
-            io->AddTask();
-            std::string task = io->Input();
-            if (!(task == "cancel" || task == "c"))
-            {
-                tasks.push_back(task);
-                marked.push_back(false);
-                numOfTasks++;
-            }
+            HandleAdd();
         }
         else if (input == "mark" || input == "m")
         {
-            if (tasks.empty())
-            {
-                io->NoTask();
-            }
-            else
-            {
-                io->MarkTask();
-                for (int i = 0; i < numOfTasks; i++)
-                {
-                    io->Numbering(i);
-                    if (marked.at(i) == true)
-                    {
-                        io->ShowMarkedTask(tasks.at(i));
-                    }
-                    else
-                    {
-                        io->ShowUnMarkedTask(tasks.at(i));
-                    }
-                }
-                std::string markNumber = io->Input();
-                if (!(markNumber == "cancel" || markNumber == "c"))
-                {
-                    if (ValidateInt(markNumber, numOfTasks))
-                    {
-                        marked.at(std::stoi(markNumber) - 1) = !marked.at(std::stoi(markNumber) - 1);
-                    }
-                    else
-                    {
-                        io->InvalidInput();
-                    }
-                }
-            }
+            HandleMark();
         }
         else if (input == "help" || input == "h")
         {
-            io->ShowHelp();
+            HandleHelp();
         }
         else if (input == "quit" || input == "q")
         {
-            taskListShouldRun = false;
+            HandleQuit();
         }
         else
         {
-            io->InvalidInput();
+            HandleInvalidInput();
         }
     }
-
-    delete io;
 }
 
-bool TASKLIST::ValidateInt(std::string num, int size)
+void TASKLIST::HandleList()
 {
-    for (int i = 0; i < num.length(); i++)
+    if (tasks.empty())
     {
-        if (!(num.at(i) >= '1' && num.at(i) <= '9'))
-        {
-            return false;
-        }
-    }
-    if (std::stoi(num) <= size)
-    {
-
-        return true;
+        io->NoTask();
     }
     else
     {
-        return false;
+        DisplayTasks();
+    }
+}
+void TASKLIST::HandleAdd()
+{
+    io->AddTask();
+    std::string taskInput = GetValidInput(noValidation);
+    if (!(taskInput == "cancel" || taskInput == "c"))
+    {
+        Task nextTask;
+        nextTask.marked = false;
+        nextTask.taskName = taskInput;
+        tasks.push_back(nextTask);
+    }
+}
+void TASKLIST::HandleMark()
+{
+    if (tasks.empty())
+    {
+        io->NoTask();
+    }
+    else
+    {
+        DisplayTasks();
+        std::string markNumber = GetValidInput(validateInt);
+        if (!(markNumber == "cancel" || markNumber == "c"))
+        {
+            if (markNumber != "invalid")
+            {
+                int taskNumber = std::stoi(markNumber) - 1;
+                tasks.at(taskNumber).marked = !tasks.at(taskNumber).marked;
+            }
+            else
+            {
+                io->InvalidInput();
+            }
+        }
+    }
+}
+void TASKLIST::HandleHelp()
+{
+    io->ShowHelp();
+}
+void TASKLIST::HandleQuit()
+{
+    taskListShouldRun = false;
+}
+void TASKLIST::HandleInvalidInput()
+{
+    io->InvalidInput();
+}
+
+void TASKLIST::DisplayTasks()
+{
+    io->Task();
+    for (int i = 0; i < tasks.size(); i++)
+    {
+        if (tasks.at(i).marked == true)
+        {
+            io->ShowMarkedTask(tasks.at(i).taskName, i);
+        }
+        else
+        {
+            io->ShowUnMarkedTask(tasks.at(i).taskName, i);
+        }
+    }
+}
+std::string TASKLIST::GetValidInput(int option)
+{
+    switch (option)
+    {
+    case 1:
+    {
+        std::string input = io->Input();
+        if (input == "cancel" || input == "c")
+        {
+            return input;
+        }
+        if (input == "0")
+        {
+            return "invalid";
+        }
+        for (int i = 0; i < input.length(); i++)
+        {
+            if (!(input.at(i) >= '0' && input.at(i) <= '9'))
+            {
+                return "invalid";
+            }
+        }
+        if (std::stoi(input) <= tasks.size())
+        {
+            return input;
+        }
+        else
+        {
+            return "invalid";
+        }
+    }
+
+    default:
+    {
+        return io->Input();
+    }
     }
 }
