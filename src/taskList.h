@@ -8,6 +8,7 @@ private:
     bool taskListShouldRun = true;
     std::vector<std::string> tasks;
     std::vector<bool> marked;
+    int numOfTasks = 0;
 
 public:
     TASKLIST();

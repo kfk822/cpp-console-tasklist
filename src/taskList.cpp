@@ -20,7 +20,7 @@ void TASKLIST::Run()
         io->ShowOptions();
         std::string input = io->Input();
 
-        if (input == "view" || input == "v")
+        if (input == "list" || input == "l")
         {
             if (tasks.empty())
             {
@@ -29,7 +29,7 @@ void TASKLIST::Run()
             else
             {
                 io->Task();
-                for (int i = 0; i < tasks.size(); i++)
+                for (int i = 0; i < numOfTasks; i++)
                 {
                     if (marked.at(i) == true)
                     {
@@ -45,8 +45,13 @@ void TASKLIST::Run()
         else if (input == "add" || input == "a")
         {
             io->AddTask();
-            tasks.push_back(io->Input());
-            marked.push_back(false);
+            std::string task = io->Input();
+            if (!(task == "cancel" || task == "c"))
+            {
+                tasks.push_back(task);
+                marked.push_back(false);
+                numOfTasks++;
+            }
         }
         else if (input == "mark" || input == "m")
         {
@@ -57,7 +62,7 @@ void TASKLIST::Run()
             else
             {
                 io->MarkTask();
-                for (int i = 0; i < tasks.size(); i++)
+                for (int i = 0; i < numOfTasks; i++)
                 {
                     io->Numbering(i);
                     if (marked.at(i) == true)
@@ -70,13 +75,16 @@ void TASKLIST::Run()
                     }
                 }
                 std::string markNumber = io->Input();
-                if (ValidateInt(markNumber, tasks.size()))
+                if (!(markNumber == "cancel" || markNumber == "c"))
                 {
-                    marked.at(std::stoi(markNumber) - 1) = !marked.at(std::stoi(markNumber) - 1);
-                }
-                else
-                {
-                    io->InvalidInput();
+                    if (ValidateInt(markNumber, numOfTasks))
+                    {
+                        marked.at(std::stoi(markNumber) - 1) = !marked.at(std::stoi(markNumber) - 1);
+                    }
+                    else
+                    {
+                        io->InvalidInput();
+                    }
                 }
             }
         }

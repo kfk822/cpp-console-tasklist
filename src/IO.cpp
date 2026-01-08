@@ -61,9 +61,10 @@ void IO::ShowOptions()
 void IO::ShowHelp()
 {
     std::cout << "Availabe commands:\n";
-    std::cout << "view\tView task list\n";
-    std::cout << "add\tAdd new task\n";
-    std::cout << "mark\tMark task as finished\n";
+    std::cout << "list (l)\tlist tasks\n";
+    std::cout << "add (a)\tAdd new task\n";
+    std::cout << "mark (m)\tMark task as finished\n";
+    std::cout << "cancel (c)\tCancel current action\n";
 }
 
 void IO::InvalidInput()
