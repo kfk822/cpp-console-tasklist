@@ -20,4 +20,6 @@ public:
     void ShowOptions();
     void ShowHelp();
     void InvalidInput();
+    void SaveUnsuccesful();
+    void LoadUnsuccesful();
 };

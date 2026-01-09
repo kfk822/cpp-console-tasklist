@@ -9,6 +9,7 @@ add_executable(cpp_taskList
 	src/main.cpp
 	src/taskList.cpp
 	src/IO.cpp
+	src/fileHandler.cpp
 )
 
 target_include_directories(cpp_taskList PRIVATE external)

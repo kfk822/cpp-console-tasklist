@@ -1,16 +1,15 @@
 #include "taskList.h"
-#include "IO.h"
-#include <vector>
-#include <string>
 
 TASKLIST::TASKLIST()
 {
     io = new IO();
+    filehandler = new FILEHANDLER();
 }
 
 TASKLIST::~TASKLIST()
 {
     delete io;
+    delete filehandler;
 }
 
 void TASKLIST::Run()
@@ -64,7 +63,8 @@ void TASKLIST::HandleAdd()
     std::string taskInput = GetValidInput(noValidation);
     if (!(taskInput == "cancel" || taskInput == "c"))
     {
-        tasks.push_back({false, taskInput});
+        tasks.push_back({taskInput, false});
+        Save();
     }
 }
 void TASKLIST::HandleMark()
@@ -83,6 +83,7 @@ void TASKLIST::HandleMark()
             {
                 int taskNumber = std::stoi(markNumber) - 1;
                 tasks.at(taskNumber).marked = !tasks.at(taskNumber).marked;
+                Save();
             }
             else
             {
@@ -156,4 +157,14 @@ std::string TASKLIST::GetValidInput(int option)
         return io->Input();
     }
     }
+}
+void TASKLIST::Save()
+{
+    if (!filehandler->SaveFile(tasks))
+    {
+        io->SaveUnsuccesful();
+    }
+}
+void TASKLIST::Load()
+{
 }

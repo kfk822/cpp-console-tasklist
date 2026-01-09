@@ -1,19 +1,16 @@
 #pragma once
-#include "io.h"
+#include "IO.h"
+#include "fileHandler.h"
+#include "taskStruct.h"
 #include <vector>
 #include <string>
-
-struct Task
-{
-    bool marked;
-    std::string taskName;
-};
 
 class TASKLIST
 {
 private:
     bool taskListShouldRun = true;
     IO *io;
+    FILEHANDLER *filehandler;
 
     std::vector<struct Task> tasks;
 
@@ -30,6 +27,8 @@ private:
     void DisplayTasks();
     std::string GetValidInput(int option);
     bool ValidateInt(std::string num, int size);
+    void Save();
+    void Load();
 
 public:
     TASKLIST();

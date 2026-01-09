@@ -62,6 +62,11 @@ void IO::InvalidInput()
     std::cout << "Invalid input!\n";
 }
 
+void IO::SaveUnsuccesful()
+{
+    std::cout << "Failed to save file!!";
+}
+
 void IO::line()
 {
     std::cout << "-----------------------\n";
