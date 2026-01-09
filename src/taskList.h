@@ -3,17 +3,18 @@
 #include <vector>
 #include <string>
 
+struct Task
+{
+    bool marked;
+    std::string taskName;
+};
+
 class TASKLIST
 {
 private:
     bool taskListShouldRun = true;
     IO *io;
 
-    struct Task
-    {
-        bool marked;
-        std::string taskName;
-    };
     std::vector<struct Task> tasks;
 
     int noValidation = 0;
