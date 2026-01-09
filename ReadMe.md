@@ -15,6 +15,20 @@ as a helper for future projects.
 - Add tasks from console
 - Mark completed tasks
 
+## Data storage
+
+Task data is stored in a JSON file (`tasks.json`).
+
+JSON was chosen because:
+- it is human-readable and easy to debug
+- it allows future extension without breaking existing data
+
+## Dependencies
+
+This project uses the following third-party library:
+
+- **nlohmann/json**
+
 ## Windows (prebuilt)
 
 Download the `.exe` from the Releases page and run it.

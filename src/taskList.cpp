@@ -64,10 +64,7 @@ void TASKLIST::HandleAdd()
     std::string taskInput = GetValidInput(noValidation);
     if (!(taskInput == "cancel" || taskInput == "c"))
     {
-        Task nextTask;
-        nextTask.marked = false;
-        nextTask.taskName = taskInput;
-        tasks.push_back(nextTask);
+        tasks.push_back({false, taskInput});
     }
 }
 void TASKLIST::HandleMark()

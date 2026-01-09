@@ -10,3 +10,5 @@ add_executable(cpp_taskList
 	src/taskList.cpp
 	src/IO.cpp
 )
+
+target_include_directories(cpp_taskList PRIVATE external)
