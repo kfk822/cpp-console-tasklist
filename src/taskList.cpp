@@ -14,6 +14,7 @@ TASKLIST::~TASKLIST()
 
 void TASKLIST::Run()
 {
+    Load();
     while (taskListShouldRun)
     {
         io->ShowOptions();
@@ -167,4 +168,12 @@ void TASKLIST::Save()
 }
 void TASKLIST::Load()
 {
+    if (filehandler->LoadFile(tasks))
+    {
+        io->LoadSuccesful();
+    }
+    else
+    {
+        io->LoadUnsuccesful();
+    }
 }

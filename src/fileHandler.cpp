@@ -18,9 +18,8 @@ bool FILEHANDLER::SaveFile(std::vector<struct Task> tasks)
             outputJSON[taskNumber] = {
                 {"Task", tasks.at(i).taskName},
                 {"Completed", tasks.at(i).marked}};
-
-            taskOutput << outputJSON.dump(4);
         }
+        taskOutput << outputJSON.dump(4);
         taskOutput.close();
         return true;
     }
@@ -30,6 +29,24 @@ bool FILEHANDLER::SaveFile(std::vector<struct Task> tasks)
     }
 }
 
-void FILEHANDLER::LoadFile(std::vector<struct Task> &tasks)
+bool FILEHANDLER::LoadFile(std::vector<struct Task> &tasks)
 {
+    taskInput = std::ifstream("task.json");
+    nlohmann::json taskList;
+    if (taskInput.is_open())
+    {
+        taskInput >> taskList;
+
+        for (auto &element : taskList.items())
+        {
+            tasks.push_back({element.value()["Task"], element.value()["Completed"]});
+        }
+        taskInput.close();
+
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }

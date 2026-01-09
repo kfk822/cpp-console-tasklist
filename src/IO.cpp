@@ -67,6 +67,16 @@ void IO::SaveUnsuccesful()
     std::cout << "Failed to save file!!";
 }
 
+void IO::LoadSuccesful()
+{
+    std::cout << "Task from task.json succesfully loaded!\n";
+}
+
+void IO::LoadUnsuccesful()
+{
+    std::cout << "task.json not found!\n";
+}
+
 void IO::line()
 {
     std::cout << "-----------------------\n";

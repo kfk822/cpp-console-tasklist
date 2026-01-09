@@ -18,5 +18,5 @@ public:
     ~FILEHANDLER();
 
     bool SaveFile(std::vector<struct Task> tasks);
-    void LoadFile(std::vector<struct Task> &tasks);
+    bool LoadFile(std::vector<struct Task> &tasks);
 };

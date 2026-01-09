@@ -21,5 +21,6 @@ public:
     void ShowHelp();
     void InvalidInput();
     void SaveUnsuccesful();
+    void LoadSuccesful();
     void LoadUnsuccesful();
 };
