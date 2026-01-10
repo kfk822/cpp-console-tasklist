@@ -9,7 +9,7 @@ FILEHANDLER::~FILEHANDLER()
 
 bool FILEHANDLER::SaveFile(std::vector<struct Task> tasks)
 {
-    taskOutput = std::ofstream("task.json");
+    taskOutput = std::ofstream("task.json", std::ios::out | std::ios::trunc);
     if (taskOutput.is_open())
     {
         for (int i = 0; i < tasks.size(); i++)

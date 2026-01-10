@@ -20,6 +20,7 @@ private:
 
     void HandleList();
     void HandleAdd();
+    void HandleRemove();
     void HandleMark();
     void HandleHelp();
     void HandlePrio();

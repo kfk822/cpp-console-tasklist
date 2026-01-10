@@ -20,6 +20,7 @@ public:
     void WritePrio();
     void PrioOptions();
     void ShowOptions();
+    void RemoveTask();
     void ShowHelp();
     void InvalidInput();
     void SaveUnsuccesful();

@@ -42,6 +42,11 @@ void IO::AddTask()
     std::cout << "Add task:\n";
 }
 
+void IO::RemoveTask()
+{
+    std::cout << "Select task to remove:";
+}
+
 void IO::WritePrio()
 {
     std::cout << "Choose task:\n";
@@ -71,6 +76,7 @@ void IO::ShowHelp()
     std::cout << "add\t(a)\tAdd new task\n";
     std::cout << "mark\t(m)\tMark task as finished\n";
     std::cout << "prio\t(p)\tSet task priority\n";
+    std::cout << "remove\t(r)\tRemove task";
     std::cout << "cancel\t(c)\tCancel current action\n";
 }
 

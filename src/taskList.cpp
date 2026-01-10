@@ -28,6 +28,10 @@ void TASKLIST::Run()
         {
             HandleAdd();
         }
+        else if (input == "remove" || input == "r")
+        {
+            HandleRemove();
+        }
         else if (input == "mark" || input == "m")
         {
             HandleMark();
@@ -71,6 +75,24 @@ void TASKLIST::HandleAdd()
         tasks.push_back({taskInput, false});
         SetPrio(static_cast<int>(tasks.size() - 1));
         Save();
+    }
+}
+void TASKLIST::HandleRemove()
+{
+    io->RemoveTask();
+    DisplayTasks();
+    std::string taskNum = GetValidInput(validateInt);
+    if (!(taskNum == "cancel" || taskNum == "c"))
+    {
+        if (taskNum == "invalid")
+        {
+            io->InvalidInput();
+        }
+        else
+        {
+            tasks.erase(tasks.begin() + (std::stoi(taskNum) - 1));
+            Save();
+        }
     }
 }
 void TASKLIST::HandleMark()

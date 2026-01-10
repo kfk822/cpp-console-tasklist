@@ -12,7 +12,8 @@ as a helper for future projects.
 ## Features
 
 - View tasks
-- Add tasks from console
+- Add tasks 
+- Delete tasks
 - Mark completed tasks
 - Task prioritization
 - Auto-save
@@ -54,8 +55,7 @@ cmake ..
 cmake --build .
 ```
 
-## Planned featurs
+## Planned features
 
-- Delete tasks
 - Advanced sorting
 - Dynamic filtering
