@@ -16,17 +16,20 @@ private:
 
     int noValidation = 0;
     int validateInt = 1;
+    int validePrio = 2;
 
     void HandleList();
     void HandleAdd();
     void HandleMark();
     void HandleHelp();
+    void HandlePrio();
     void HandleQuit();
     void HandleInvalidInput();
 
     void DisplayTasks();
     std::string GetValidInput(int option);
     bool ValidateInt(std::string num, int size);
+    void SetPrio(int taskNum);
     void Save();
     void Load();
 

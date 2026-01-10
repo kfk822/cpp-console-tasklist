@@ -14,7 +14,9 @@ as a helper for future projects.
 - View tasks
 - Add tasks from console
 - Mark completed tasks
+- Task prioritization
 - Auto-save
+- Load progress from file
 
 ## Data storage
 
@@ -54,7 +56,6 @@ cmake --build .
 
 ## Planned featurs
 
-- Load progress from file
-- Task prioritization
+- Delete tasks
 - Advanced sorting
 - Dynamic filtering

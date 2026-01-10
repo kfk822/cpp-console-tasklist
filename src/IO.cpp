@@ -27,19 +27,35 @@ void IO::Task()
     std::cout << "Tasks([ ] == unfinished, [X] == finished):\n";
 }
 
-void IO::ShowMarkedTask(std::string task, int taskNum)
+void IO::ShowMarkedTask(std::string task, int taskNum, std::string Prio)
 {
-    std::cout << taskNum + 1 << ".) [X] " << task << "\n";
+    std::cout << taskNum + 1 << ".) [X] " << Prio << " " << task << "\n";
 }
 
-void IO::ShowUnMarkedTask(std::string task, int taskNum)
+void IO::ShowUnMarkedTask(std::string task, int taskNum, std::string Prio)
 {
-    std::cout << taskNum + 1 << ".) [ ] " << task << "\n";
+    std::cout << taskNum + 1 << ".) [ ] " << Prio << " " << task << "\n";
 }
 
 void IO::AddTask()
 {
     std::cout << "Add task:\n";
+}
+
+void IO::WritePrio()
+{
+    std::cout << "Choose task:\n";
+}
+
+void IO::PrioOptions()
+{
+    line();
+    std::cout << "Priority level options:\n";
+    std::cout << "1.) Urgent\n";
+    std::cout << "2.) High\n";
+    std::cout << "3.) Medium\n";
+    std::cout << "4.) Low\n";
+    std::cout << "5.) Optional\n";
 }
 
 void IO::ShowOptions()
@@ -54,6 +70,7 @@ void IO::ShowHelp()
     std::cout << "list\t(l)\tList tasks\n";
     std::cout << "add\t(a)\tAdd new task\n";
     std::cout << "mark\t(m)\tMark task as finished\n";
+    std::cout << "prio\t(p)\tSet task priority\n";
     std::cout << "cancel\t(c)\tCancel current action\n";
 }
 
