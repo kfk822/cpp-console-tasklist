@@ -5,6 +5,6 @@ struct Task
 {
     std::string taskName;
     bool marked;
-    std::string Prio;
-    int Priolevel;
+    std::string Prio = "Optional";
+    int Priolevel = 5;
 };
