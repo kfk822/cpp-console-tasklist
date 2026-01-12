@@ -17,6 +17,8 @@ as a helper for future projects.
 - Mark completed tasks
 - Task prioritization
 - Auto-save
+- Dynamic filtering
+- Advanced sorting
 - Load progress from file
 
 ## Data storage
@@ -54,8 +56,3 @@ cd build
 cmake ..
 cmake --build .
 ```
-
-## Planned features
-
-- Advanced sorting
-- Dynamic filtering

@@ -3,6 +3,7 @@
 #include "fileHandler.h"
 #include "taskStruct.h"
 #include "filter.h"
+#include "sort.h"
 #include <vector>
 #include <string>
 
@@ -13,6 +14,7 @@ private:
     IO *io;
     FILEHANDLER *filehandler;
     FILTER *filter;
+    SORT *sort;
 
     std::vector<struct Task> tasks;
     std::vector<struct Task> filteredTasks;
@@ -21,8 +23,12 @@ private:
     int validateInt = 1;
     int validatePrio = 2;
     int validateFilter = 3;
+    int validateSort = 4;
 
     int filterNumber = 8;
+    int sortNumber = 3;
+    int ASC = 0;
+    int DESC = 1;
 
     void HandleList();
     void HandleAdd();
@@ -31,6 +37,7 @@ private:
     void HandleHelp();
     void HandlePrio();
     void HandleFilter();
+    void HandleSort();
     void HandleQuit();
     void HandleInvalidInput();
 
@@ -39,6 +46,7 @@ private:
     bool ValidateInt(std::string num, int size);
     void SetPrio(int taskNum);
     void SetFilter(int filterNumber);
+    void SetSort(int sortNumber);
     void Save();
     void Load();
 

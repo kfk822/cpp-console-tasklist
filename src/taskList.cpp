@@ -5,7 +5,7 @@ TASKLIST::TASKLIST()
     io = new IO();
     filehandler = new FILEHANDLER();
     filter = new FILTER();
-    filterNumber = 8;
+    sort = new SORT();
 }
 
 TASKLIST::~TASKLIST()
@@ -13,6 +13,7 @@ TASKLIST::~TASKLIST()
     delete io;
     delete filehandler;
     delete filter;
+    delete sort;
 }
 
 void TASKLIST::Run()
@@ -50,6 +51,10 @@ void TASKLIST::Run()
         else if (input == "filter" || input == "f")
         {
             HandleFilter();
+        }
+        else if (input == "sort" || input == "s")
+        {
+            HandleSort();
         }
         else if (input == "quit" || input == "q")
         {
@@ -175,6 +180,22 @@ void TASKLIST::HandleFilter()
         }
     }
 }
+void TASKLIST::HandleSort()
+{
+    io->SortOptions();
+    std::string sortOption = GetValidInput(validateSort);
+    if (!(sortOption == "cancel" || sortOption == "c"))
+    {
+        if (sortOption == "invalid")
+        {
+            io->InvalidInput();
+        }
+        else
+        {
+            sortNumber = std::stoi(sortOption);
+        }
+    }
+}
 void TASKLIST::HandleQuit()
 {
     taskListShouldRun = false;
@@ -188,6 +209,7 @@ void TASKLIST::DisplayTasks()
 {
     io->Task();
     SetFilter(filterNumber);
+    SetSort(sortNumber);
     for (int i = 0; i < filteredTasks.size(); i++)
     {
         if (filteredTasks.at(i).marked == true)
@@ -275,6 +297,23 @@ std::string TASKLIST::GetValidInput(int option)
             return "invalid";
         }
     }
+    case 4:
+        if (input == "cancel" || input == "c")
+        {
+            return input;
+        }
+        else if (input.empty())
+        {
+            return "invalid";
+        }
+        else if (input.at(0) >= '1' && input.at(0) <= '6' && input.length() == 1)
+        {
+            return input;
+        }
+        else
+        {
+            return "invalid";
+        }
 
     default:
     {
@@ -367,6 +406,44 @@ void TASKLIST::SetFilter(int filterNumber)
     else
     {
         filteredTasks = tasks;
+    }
+}
+void TASKLIST::SetSort(int sortNumber)
+{
+    switch (sortNumber)
+    {
+    case 1:
+    {
+        filteredTasks = sort->SortByName(filteredTasks, 0);
+        break;
+    }
+    case 2:
+    {
+        filteredTasks = sort->SortByName(filteredTasks, 1);
+        break;
+    }
+    case 3:
+    {
+        filteredTasks = sort->SortByMark(filteredTasks, 0);
+        break;
+    }
+    case 4:
+    {
+        filteredTasks = sort->SortByMark(filteredTasks, 1);
+        break;
+    }
+    case 5:
+    {
+        filteredTasks = sort->SortByPriority(filteredTasks, 0);
+        break;
+    }
+    case 6:
+    {
+        filteredTasks = sort->SortByPriority(filteredTasks, 1);
+        break;
+    }
+    default:
+        break;
     }
 }
 void TASKLIST::Save()

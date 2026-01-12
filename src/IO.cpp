@@ -82,6 +82,17 @@ void IO::FilterOptions()
     std::cout << "8.) Show all tasks\n";
 }
 
+void IO::SortOptions()
+{
+    std::cout << "Sort oprions:\n";
+    std::cout << "1.) Sort by name (ASC)\n";
+    std::cout << "2.) Sort by name (DESC)\n";
+    std::cout << "3.) Sort by mark (unfinished first) [default]\n";
+    std::cout << "4.) Sort by mark (finished first)\n";
+    std::cout << "5.) Sort by priority (urgent first)\n";
+    std::cout << "6.) Sort by priority (optional first)\n";
+}
+
 void IO::ShowHelp()
 {
     std::cout << "Availabe commands:\n";
@@ -91,6 +102,7 @@ void IO::ShowHelp()
     std::cout << "prio\t(p)\tSet task priority\n";
     std::cout << "remove\t(r)\tRemove task";
     std::cout << "filter\t(f)\tFilter tasks";
+    std::cout << "sort\t(s)\tSort tasks\n";
     std::cout << "cancel\t(c)\tCancel current action\n";
 }
 

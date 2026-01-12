@@ -22,6 +22,7 @@ public:
     void ShowOptions();
     void RemoveTask();
     void FilterOptions();
+    void SortOptions();
     void ShowHelp();
     void InvalidInput();
     void SaveUnsuccesful();

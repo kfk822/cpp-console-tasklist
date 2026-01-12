@@ -11,6 +11,7 @@ add_executable(cpp_taskList
 	src/IO.cpp
 	src/fileHandler.cpp
 	src/filter.cpp
+	src/sort.cpp
 )
 
 target_include_directories(cpp_taskList PRIVATE external)
