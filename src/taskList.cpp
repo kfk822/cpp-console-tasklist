@@ -242,9 +242,9 @@ std::string TASKLIST::GetValidInput(int option)
         {
             return "invalid";
         }
-        for (int i = 0; i < input.length(); i++)
+        for (auto character : input)
         {
-            if (!(input.at(i) >= '0' && input.at(i) <= '9'))
+            if (!(character >= '0' && character <= '9'))
             {
                 return "invalid";
             }

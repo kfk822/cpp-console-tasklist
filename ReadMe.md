@@ -2,8 +2,6 @@
 
 A simple console-based task manager application.
 
-## WORK IN PROGRESS
-
 ## Motivation
 
 The goal is to build a simple console application that can serve
