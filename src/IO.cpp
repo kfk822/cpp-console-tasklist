@@ -13,7 +13,7 @@ IO::~IO()
 std::string IO::Input()
 {
     std::string input;
-    std::cin >> input;
+    std::getline(std::cin, input);
     return input;
 }
 

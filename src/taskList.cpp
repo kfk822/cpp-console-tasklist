@@ -77,7 +77,11 @@ void TASKLIST::HandleAdd()
 {
     io->AddTask();
     std::string taskInput = GetValidInput(noValidation);
-    if (!(taskInput == "cancel" || taskInput == "c"))
+    if (taskInput == "invalid")
+    {
+        io->InvalidInput();
+    }
+    else if (!(taskInput == "cancel" || taskInput == "c"))
     {
         tasks.push_back({taskInput, false});
         SetPrio(int(tasks.size() - 1));
@@ -198,16 +202,21 @@ void TASKLIST::DisplayTasks()
 }
 std::string TASKLIST::GetValidInput(int option)
 {
+    std::string input = io->Input();
     switch (option)
     {
     case 1:
     {
-        std::string input = io->Input();
+
         if (input == "cancel" || input == "c")
         {
             return input;
         }
-        if (input == "0")
+        else if (input == "0")
+        {
+            return "invalid";
+        }
+        else if (input.empty())
         {
             return "invalid";
         }
@@ -229,12 +238,15 @@ std::string TASKLIST::GetValidInput(int option)
     }
     case 2:
     {
-        std::string input = io->Input();
         if (input == "cancel" || input == "c")
         {
             return input;
         }
-        if (input.at(0) >= '1' && input.at(0) <= '5' && input.length() == 1)
+        else if (input.empty())
+        {
+            return "invalid";
+        }
+        else if (input.at(0) >= '1' && input.at(0) <= '5' && input.length() == 1)
         {
             return input;
         }
@@ -246,12 +258,15 @@ std::string TASKLIST::GetValidInput(int option)
     }
     case 3:
     {
-        std::string input = io->Input();
         if (input == "cancel" || input == "c")
         {
             return input;
         }
-        if (input.at(0) >= '1' && input.at(0) <= '8' && input.length() == 1)
+        else if (input.empty())
+        {
+            return "invalid";
+        }
+        else if (input.at(0) >= '1' && input.at(0) <= '8' && input.length() == 1)
         {
             return input;
         }
@@ -263,7 +278,14 @@ std::string TASKLIST::GetValidInput(int option)
 
     default:
     {
-        return io->Input();
+        if (input.empty())
+        {
+            return "invalid";
+        }
+        else
+        {
+            return input;
+        }
     }
     }
 }
