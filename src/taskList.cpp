@@ -4,12 +4,15 @@ TASKLIST::TASKLIST()
 {
     io = new IO();
     filehandler = new FILEHANDLER();
+    filter = new FILTER();
+    filterNumber = 8;
 }
 
 TASKLIST::~TASKLIST()
 {
     delete io;
     delete filehandler;
+    delete filter;
 }
 
 void TASKLIST::Run()
@@ -44,6 +47,10 @@ void TASKLIST::Run()
         {
             HandlePrio();
         }
+        else if (input == "filter" || input == "f")
+        {
+            HandleFilter();
+        }
         else if (input == "quit" || input == "q")
         {
             HandleQuit();
@@ -73,7 +80,7 @@ void TASKLIST::HandleAdd()
     if (!(taskInput == "cancel" || taskInput == "c"))
     {
         tasks.push_back({taskInput, false});
-        SetPrio(static_cast<int>(tasks.size() - 1));
+        SetPrio(int(tasks.size() - 1));
         Save();
     }
 }
@@ -148,6 +155,22 @@ void TASKLIST::HandlePrio()
         }
     }
 }
+void TASKLIST::HandleFilter()
+{
+    io->FilterOptions();
+    std::string input = GetValidInput(validateFilter);
+    if (!(input == "cancel" || input == "c"))
+    {
+        if (input == "invalid")
+        {
+            io->InvalidInput();
+        }
+        else
+        {
+            filterNumber = std::stoi(input);
+        }
+    }
+}
 void TASKLIST::HandleQuit()
 {
     taskListShouldRun = false;
@@ -160,15 +183,16 @@ void TASKLIST::HandleInvalidInput()
 void TASKLIST::DisplayTasks()
 {
     io->Task();
-    for (int i = 0; i < tasks.size(); i++)
+    SetFilter(filterNumber);
+    for (int i = 0; i < filteredTasks.size(); i++)
     {
-        if (tasks.at(i).marked == true)
+        if (filteredTasks.at(i).marked == true)
         {
-            io->ShowMarkedTask(tasks.at(i).taskName, i, tasks.at(i).Prio);
+            io->ShowMarkedTask(filteredTasks.at(i).taskName, i, filteredTasks.at(i).Prio);
         }
         else
         {
-            io->ShowUnMarkedTask(tasks.at(i).taskName, i, tasks.at(i).Prio);
+            io->ShowUnMarkedTask(filteredTasks.at(i).taskName, i, filteredTasks.at(i).Prio);
         }
     }
 }
@@ -194,7 +218,7 @@ std::string TASKLIST::GetValidInput(int option)
                 return "invalid";
             }
         }
-        if (std::stoi(input) <= tasks.size())
+        if (std::stoi(input) <= filteredTasks.size())
         {
             return input;
         }
@@ -220,6 +244,22 @@ std::string TASKLIST::GetValidInput(int option)
         }
         return input;
     }
+    case 3:
+    {
+        std::string input = io->Input();
+        if (input == "cancel" || input == "c")
+        {
+            return input;
+        }
+        if (input.at(0) >= '1' && input.at(0) <= '8' && input.length() == 1)
+        {
+            return input;
+        }
+        else
+        {
+            return "invalid";
+        }
+    }
 
     default:
     {
@@ -230,7 +270,7 @@ std::string TASKLIST::GetValidInput(int option)
 void TASKLIST::SetPrio(int taskNum)
 {
     io->PrioOptions();
-    std::string prioLevel = GetValidInput(validePrio);
+    std::string prioLevel = GetValidInput(validatePrio);
     if (!(prioLevel == "c" || prioLevel == "cancel"))
     {
         if (prioLevel == "invalid")
@@ -277,6 +317,34 @@ void TASKLIST::SetPrio(int taskNum)
                 break;
             }
         }
+    }
+}
+void TASKLIST::SetFilter(int filterNumber)
+{
+    filteredTasks.clear();
+    if (filterNumber <= 2)
+    {
+        for (auto element : tasks)
+        {
+            if (int(element.marked) == (filterNumber - 1))
+            {
+                filteredTasks.push_back(element);
+            }
+        }
+    }
+    else if (filterNumber <= 7)
+    {
+        for (auto element : tasks)
+        {
+            if (element.Priolevel == (filterNumber - 2))
+            {
+                filteredTasks.push_back(element);
+            }
+        }
+    }
+    else
+    {
+        filteredTasks = tasks;
     }
 }
 void TASKLIST::Save()

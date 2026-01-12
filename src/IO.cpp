@@ -69,6 +69,19 @@ void IO::ShowOptions()
     std::cout << "Commands (help | quit):\n";
 }
 
+void IO::FilterOptions()
+{
+    std::cout << "Filter Options:\n";
+    std::cout << "1.) Show unmarked tasks\n";
+    std::cout << "2.) Show marked tasks\n";
+    std::cout << "3.) Show urgent tasks\n";
+    std::cout << "4.) Show high priority tasks\n";
+    std::cout << "5.) Show medium priority tasks\n";
+    std::cout << "6.) Show low priority tasks\n";
+    std::cout << "7.) Show optional tasks\n";
+    std::cout << "8.) Show all tasks\n";
+}
+
 void IO::ShowHelp()
 {
     std::cout << "Availabe commands:\n";
@@ -77,6 +90,7 @@ void IO::ShowHelp()
     std::cout << "mark\t(m)\tMark task as finished\n";
     std::cout << "prio\t(p)\tSet task priority\n";
     std::cout << "remove\t(r)\tRemove task";
+    std::cout << "filter\t(f)\tFilter tasks";
     std::cout << "cancel\t(c)\tCancel current action\n";
 }
 

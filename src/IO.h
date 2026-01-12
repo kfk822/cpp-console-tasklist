@@ -21,6 +21,7 @@ public:
     void PrioOptions();
     void ShowOptions();
     void RemoveTask();
+    void FilterOptions();
     void ShowHelp();
     void InvalidInput();
     void SaveUnsuccesful();
